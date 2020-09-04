@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "970949030535",
+    "firebase_url": "https://logino-5522b.firebaseio.com",
+    "project_id": "logino-5522b",
+    "storage_bucket": "logino-5522b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970949030535:android:8b5810ac839bc465cf7e22",
+        "android_client_info": {
+          "package_name": "com.logino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970949030535-0quht91tfuv3i6br056kqkja2cfatqpg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.logino",
+            "certificate_hash": "fc8b4a107b81c2bbae8827b0cd7949078d3a877e"
+          }
+        },
+        {
+          "client_id": "970949030535-4kk3e8dld629h7uhg9e2ni53th6g34rn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQo3Xd6vvs2yDsbh8lAtWHr16fhCn8lY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970949030535-4kk3e8dld629h7uhg9e2ni53th6g34rn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
