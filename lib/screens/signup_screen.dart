@@ -34,7 +34,7 @@ class SignUp extends StatelessWidget {
               SignButton(
                 text: 'Sign up',
                 onPressed: () {
-                  data.signInWithEmailAndPassword().whenComplete((){
+                  data.createAccountWithEmailAndPassword().whenComplete((){
                     if(data.userEmail != null){
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Home()));
                     }

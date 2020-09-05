@@ -24,14 +24,29 @@ class Data {
   String userImage, userName, userEmail, snackBarMessage;
 
 
-  // Sign in with Email & Password
+  // Create account with Email & Password
 
-  Future signInWithEmailAndPassword() async {
+  Future createAccountWithEmailAndPassword() async {
 
     assert(email != null && password != null);
     UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     User user = result.user;
     userLoggedIn = true;
+    userName = 'New member';
+    userEmail = user.email;
+
+  }
+
+
+  // Sign in with Email & Password
+
+  Future signInWithEmailAndPassword() async {
+
+    assert(email != null && password != null);
+    UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+    User user = result.user;
+    userLoggedIn = true;
+    userName = "Welcome back :)";
     userEmail = user.email;
 
   }
@@ -65,6 +80,7 @@ class Data {
     userLoggedIn = true;
     userImage = _currentUser.photoURL;
     userName = _currentUser.displayName;
+    userEmail = 'You sign in with Google';
     snackBarMessage = 'You sign in with Google successfully';
 
   }
@@ -83,6 +99,7 @@ class Data {
 
       userLoggedIn = true;
       userName = profile['first_name'];
+      userEmail = 'You sign in with Facebook';
       snackBarMessage = 'You sign in with Facebook successfully';
 
     }
@@ -101,6 +118,7 @@ class Data {
         TwitterSession session = result.session;
         userLoggedIn = true;
         userName = session.username;
+        userEmail = 'You sign in with Twitter';
         snackBarMessage = 'You sign in with Twitter successfully';
         break;
 
@@ -127,6 +145,7 @@ class Data {
       await _fbSignIn.logOut();
       await _twitterSignIn.logOut();
       userImage = null;
+      userEmail = null;
       userName = null;
       userLoggedIn = false;
     }

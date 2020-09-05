@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screen_scaler/flutter_screen_scaler.dart';
+import 'package:provider/provider.dart';
+import '../my_data.dart';
 import '../widgets/question_row.dart';
 import '../screens/home_screen.dart';
 import '../screens/signup_screen.dart';
@@ -13,10 +15,9 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
 
     ScreenScaler scale = ScreenScaler()..init(context);
-    GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+    Data data = Provider.of<Data>(context);
 
     return Scaffold(
-      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
@@ -34,7 +35,11 @@ class Login extends StatelessWidget {
               SignButton(
                 text: 'Log in',
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Home()));
+                  data.signInWithEmailAndPassword().whenComplete((){
+                    if(data.userEmail != null){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Home()));
+                    }
+                  });
                 },
               ),
               const SizedBox(height: 35),
