@@ -7,7 +7,7 @@ import 'dart:convert';
 
 
 
-class Data {
+class AuthService {
 
 
 
@@ -21,7 +21,8 @@ class Data {
 
   bool userLoggedIn = false;
   String email, password;
-  String userImage, userName, userEmail, snackBarMessage;
+  String userImage, userInfo, message;
+
 
 
   // Create account with Email & Password
@@ -31,9 +32,10 @@ class Data {
     assert(email != null && password != null);
     UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     User user = result.user;
+
     userLoggedIn = true;
-    userName = 'New member';
-    userEmail = user.email;
+    userInfo = user.email;
+    message = 'You created new account successfully';
 
   }
 
@@ -45,9 +47,10 @@ class Data {
     assert(email != null && password != null);
     UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
     User user = result.user;
+
     userLoggedIn = true;
-    userName = "Welcome back :)";
-    userEmail = user.email;
+    userInfo = user.email;
+    message = 'Welcome back to your account';
 
   }
 
@@ -72,16 +75,15 @@ class Data {
     assert(!user.isAnonymous);
     assert(await user.getIdToken() != null);
 
-    final User _currentUser = _auth.currentUser;
+    final User currentUser = _auth.currentUser;
 
-
-    assert(user.uid == _currentUser.uid);
+    assert(user.uid == currentUser.uid);
 
     userLoggedIn = true;
-    userImage = _currentUser.photoURL;
-    userName = _currentUser.displayName;
-    userEmail = 'You sign in with Google';
-    snackBarMessage = 'You sign in with Google successfully';
+    userImage = currentUser.photoURL;
+    userInfo = currentUser.displayName;
+    message = 'You signed in with Google';
+
 
   }
 
@@ -98,9 +100,8 @@ class Data {
       final profile = jsonDecode(response.body);
 
       userLoggedIn = true;
-      userName = profile['first_name'];
-      userEmail = 'You sign in with Facebook';
-      snackBarMessage = 'You sign in with Facebook successfully';
+      userInfo = profile['name'];
+      message = 'You signed in with Facebook';
 
     }
 
@@ -117,9 +118,8 @@ class Data {
       case TwitterLoginStatus.loggedIn:
         TwitterSession session = result.session;
         userLoggedIn = true;
-        userName = session.username;
-        userEmail = 'You sign in with Twitter';
-        snackBarMessage = 'You sign in with Twitter successfully';
+        userInfo = session.username;
+        message = 'You signed in with Twitter';
         break;
 
       case TwitterLoginStatus.cancelledByUser:
@@ -145,12 +145,10 @@ class Data {
       await _fbSignIn.logOut();
       await _twitterSignIn.logOut();
       userImage = null;
-      userEmail = null;
-      userName = null;
+      userInfo = null;
+      message = null;
       userLoggedIn = false;
     }
 
-
-    print('Sign out google successful');
   }
 }
